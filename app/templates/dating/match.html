@@ -54,26 +54,56 @@
 
 <script type="text/javascript">
   const socket = io("/dating");
-  socket.on("connect", function () {
-    socket.emit("userConnected");
-  });
-  socket.on("chatRooms", (chatRooms) => {
-    for (const chatRoom of chatRooms) {
-      const {
-        match_id,
-        user_id,
-        given_name,
-        profile_image_uri,
-        last_message,
-      } = chatRoom;
-      createChatItem(
-        match_id,
-        user_id,
-        given_name,
-        profile_image_uri,
-        last_message
-      );
-    }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    socket.on("connect", function () {
+      socket.emit("userConnected");
+    });
+    socket.on("chatRooms", (chatRooms) => {
+      for (const chatRoom of chatRooms) {
+        const {
+          match_id,
+          user_id,
+          given_name,
+          profile_image_uri,
+          last_message,
+        } = chatRoom;
+        createChatItem(
+          match_id,
+          user_id,
+          given_name,
+          profile_image_uri,
+          last_message
+        );
+      }
+    });
+
+    socket.on("displayAllMessages", (payload) => {
+      $(".msg_history").html("");
+      let all_messages = payload["all_messages"];
+      let recipient_profile_image_uri = payload["profile_image_uri"];
+
+      for (const message_info of all_messages) {
+        const { match_id, message_type, created_date, message } = message_info;
+        if (message_type == "receivedMessage") {
+          displayReceivedMessage(
+            created_date,
+            message,
+            recipient_profile_image_uri
+          );
+        } else if (message_type == "sentMessage") {
+          displaySentMessage(created_date, message);
+        }
+      }
+
+      $("#msg_history").scrollTop($("#msg_history")[0].scrollHeight);
+    });
+
+    socket.on("sentMessage", (payload) => {
+      displaySentMessage(payload["created_date"], payload["message"]);
+      $("#chat-list a.active #last-message").html(`${payload["message"]}`);
+      $("#msg_history").scrollTop($("#msg_history")[0].scrollHeight);
+    });
   });
 </script>
 

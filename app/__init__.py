@@ -60,13 +60,7 @@ from .models import Social, User as DatingUser, Gender, Passion
 
 @login_manager.user_loader
 def load_user(user_id):
-    if user_id.startswith('mongo_'):
-        user_json = user_db.profile.find_one({'_id': user_id})
-        if not user_json:
-            return None
-        return AIUser(user_json)
-    else:
-        return DatingUser.query.get(user_id)
+    return DatingUser.query.get(user_id)
 
 with app.app_context():
     from app.features.dating.utils import social_generator, gender_generator, passion_generator
