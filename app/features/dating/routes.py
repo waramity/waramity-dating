@@ -54,9 +54,6 @@ def haversine(lat1, lon1, lat2, lon2):
 
 @dating.route('/')
 def index():
-
-    if session['platform'] != 'dating':
-        logout_user()
     if current_user.is_authenticated:
         if current_user.given_name is None:
             return redirect(url_for('auth.create_profile'))
