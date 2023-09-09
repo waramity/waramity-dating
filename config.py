@@ -1,15 +1,13 @@
 import os
 from dotenv import dotenv_values
 
-print(os.environ.get("GOOGLE_CLIENT_ID"))
 config = dotenv_values(".env")
-print()
 
 
 class Config:
     DEBUG = False
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = config['SQLALCHEMY_DATABASE_URI']
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = config['SECRET_KEY']
     LANGUAGES = ['th', 'en']

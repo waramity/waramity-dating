@@ -32,8 +32,6 @@ login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
-
 from app.features.dating import dating as dating_blueprint, socketio as dating_socket
 app.register_blueprint(dating_blueprint)
 
