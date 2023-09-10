@@ -80,7 +80,7 @@ def message(form):
     db.session.commit()
 
     socketio.emit("sentMessage", {"match_id": match_id, "recipient_id": recipient_id, "sender_id": current_user.id, "message": message, "created_date": json.dumps(new_message.created_date, default=stringifyDateTime)}, room=current_user.id, namespace='/dating')
-    socketio.emit("receivedMessage", {"match_id": match_id, "recipient_id": recipient_id, "sender_id": current_user.id, "message": message, "created_date": json.dumps(new_message.created_date, default=stringifyDateTime), "firstName": current_user.given_name}, room=recipient_id, namespace='/dating')
+    socketio.emit("receivedMessage", {"match_id": match_id, "recipient_id": recipient_id, "sender_id": current_user.id, "message": message, "created_date": json.dumps(new_message.created_date, default=stringifyDateTime), "firstName": current_user.given_name, "recipient_profile_image_uri": user.profile_images[0].rendered_data}, room=recipient_id, namespace='/dating')
 
 @socketio.on("receivedMessageServer", namespace='/dating')
 def receivedMessage(data):
