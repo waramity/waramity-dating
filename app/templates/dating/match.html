@@ -109,6 +109,10 @@
     socket.on("receivedMessage", (data) => {
       socket.emit("receivedMessageServer", data);
     });
+
+    socket.on("displayNotification", (data) => {
+      console.log("nahee");
+    });
   });
 </script>
 
