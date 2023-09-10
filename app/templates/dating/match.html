@@ -58,6 +58,8 @@
   document.addEventListener("DOMContentLoaded", () => {
     socket.on("connect", function () {
       socket.emit("userConnected");
+
+      console.log("kuy");
     });
     socket.on("chatRooms", (chatRooms) => {
       for (const chatRoom of chatRooms) {
@@ -76,6 +78,7 @@
           last_message
         );
       }
+      console.log("kuy");
     });
 
     socket.on("displayAllMessages", (payload) => {

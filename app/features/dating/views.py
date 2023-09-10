@@ -11,7 +11,7 @@ import datetime, time
 from sqlalchemy import func
 
 
-from app import db
+from app import app, db
 
 socketio = SocketIO()
 

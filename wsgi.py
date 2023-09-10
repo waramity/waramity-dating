@@ -5,6 +5,8 @@ from app import app
 
 from app.scheduler import sched
 
+from app.features.dating import socketio
+
 if __name__ == "__main__":
     # app.run(host="0.0.0.0", port=80, debug=True)
     sched.start()
