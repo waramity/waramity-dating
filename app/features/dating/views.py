@@ -81,3 +81,10 @@ def message(form):
 
     socketio.emit("sentMessage", {"match_id": match_id, "recipient_id": recipient_id, "sender_id": current_user.id, "message": message, "created_date": json.dumps(new_message.created_date, default=stringifyDateTime)}, room=current_user.id, namespace='/dating')
     socketio.emit("receivedMessage", {"match_id": match_id, "recipient_id": recipient_id, "sender_id": current_user.id, "message": message, "created_date": json.dumps(new_message.created_date, default=stringifyDateTime), "firstName": current_user.given_name}, room=recipient_id, namespace='/dating')
+
+@socketio.on("receivedMessageServer", namespace='/dating')
+def receivedMessage(data):
+    if data["sender_id"] == session.get("currentChat"):
+        # socketio.emit("displayReceivedMessage", data, room=data["recipientID"])
+    else:
+        # socketio.emit("displayNotification", data, room=data["recipientID"])
