@@ -2,3 +2,5 @@
 venv
 node_modules
 app/db.sqlite3
+app/__pycache__
+flask_session
