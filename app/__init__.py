@@ -23,7 +23,7 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 app = Flask(__name__)
 
-app.debug = True  # Enable debug mode
+app.debug = True
 app.config.from_object(Config)
 
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -75,10 +75,7 @@ if not database_exists(DB_URL):
 
 with app.app_context():
     from app.features.dating.utils import social_generator, gender_generator, passion_generator
-    # db.drop_all()
     db.create_all()
     social_generator()
     gender_generator()
     passion_generator()
-
-    # Check the connection status
