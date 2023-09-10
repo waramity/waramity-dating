@@ -114,7 +114,9 @@
       console.log("nahee");
       console.log(payload);
 
-      // $("#chat-list a.active #last-message").html(`${payload["message"]}`);
+      $(
+        `#chat-list a#chat-item__link-${payload["sender_id"]} #last-message `
+      ).html(`${payload["message"]}`);
     });
 
     socket.on("displayReceivedMessage", (payload) => {
