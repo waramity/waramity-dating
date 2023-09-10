@@ -85,8 +85,6 @@ def message(form):
 @socketio.on("receivedMessageServer", namespace='/dating')
 def receivedMessage(data):
     if data["sender_id"] == session.get("current_chat"):
-        print("kuy")
-        # socketio.emit("displayReceivedMessage", data, room=data["recipientID"])
+        socketio.emit("displayReceivedMessage", data, room=data["recipient_id"], namespace='/dating')
     else:
-        # print("sus")
         socketio.emit("displayNotification", data, room=data["recipient_id"], namespace='/dating')

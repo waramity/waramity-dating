@@ -106,12 +106,22 @@
       $("#msg_history").scrollTop($("#msg_history")[0].scrollHeight);
     });
 
-    socket.on("receivedMessage", (data) => {
-      socket.emit("receivedMessageServer", data);
+    socket.on("receivedMessage", (payload) => {
+      socket.emit("receivedMessageServer", payload);
     });
 
-    socket.on("displayNotification", (data) => {
+    socket.on("displayNotification", (payload) => {
       console.log("nahee");
+      console.log(payload["message"]);
+
+      // $("#chat-list a.active #last-message").html(`${payload["message"]}`);
+    });
+
+    socket.on("displayReceivedMessage", (payload) => {
+      console.log("esus");
+      console.log(payload["message"]);
+
+      $("#chat-list a.active #last-message").html(`${payload["message"]}`);
     });
   });
 </script>
