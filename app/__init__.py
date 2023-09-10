@@ -13,6 +13,8 @@ from pymongo import MongoClient
 from flask_login import UserMixin
 from bson import ObjectId
 
+from sqlalchemy_utils import database_exists, create_database, drop_database
+
 
 
 load_dotenv()
@@ -64,6 +66,12 @@ from .models import Social, User as DatingUser, Gender, Passion
 @login_manager.user_loader
 def load_user(user_id):
     return DatingUser.query.get(user_id)
+
+DB_URL = app.config["SQLALCHEMY_DATABASE_URI"]
+
+if not database_exists(DB_URL):
+    create_database(DB_URL)
+
 
 with app.app_context():
     from app.features.dating.utils import social_generator, gender_generator, passion_generator
