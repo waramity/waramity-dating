@@ -3,7 +3,13 @@ services:
   web:
     build: .
     image: docker.waramity-dating
+    env_file: .env
     ports:
       - "56730:80"
     volumes:
       - .:/app
+  db:
+    image: postgres:15.4
+    env_file: .env
+    expose:
+      - 5432
