@@ -1,0 +1,9 @@
+version: "3"
+services:
+  web:
+    build: .
+    image: docker.waramity-dating
+    ports:
+      - "56730:80"
+    volumes:
+      - .:/app
