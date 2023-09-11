@@ -54,6 +54,6 @@ RUN chown -R www:www /var/www/
 USER www
 
 
-EXPOSE 5000
+EXPOSE 443
 
-CMD [ "gunicorn", "-w", "4", "--bind", "0.0.0.0:5000", "wsgi:app"]
+CMD [ "gunicorn", "-w", "4", "--bind", "0.0.0.0:443", "wsgi:app"]
