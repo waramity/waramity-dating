@@ -4,8 +4,8 @@ services:
     build: .
     image: docker.waramity-dating
     env_file: .env
-    # ports:
-    #   - "56730:80"
+    ports:
+      - "56730:80"
     volumes:
       - .:/app
   db:
