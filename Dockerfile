@@ -47,10 +47,12 @@ RUN pip install gunicorn
 RUN addgroup -g $GROUP_ID www
 RUN adduser -D -u $USER_ID -G www www -s /bin/sh
 
+
+RUN chown -R www:www /var/www/
+
 # Change current user to www
 USER www
 
-RUN chown -R www:www /var/www/
 
 EXPOSE 5000
 
