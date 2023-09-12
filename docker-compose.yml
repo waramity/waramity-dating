@@ -15,10 +15,10 @@ services:
       - frontend
       - backend
   nginx:
-    build:
-      context: nginx
-      dockerfile: Dockerfile
-    image: nginx
+    # build:
+    #   context: nginx
+    #   dockerfile: Dockerfile
+    image: nginx:alpine
     container_name: ngnix
     restart: unless-stopped
     tty: true
@@ -26,7 +26,10 @@ services:
       - "56728:80"
       - "443:443"
     volumes:
-      - nginx:/etc/nginx
+      # - nginx:/etc/nginx
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+
     depends_on:
       - app
     networks:
