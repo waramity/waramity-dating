@@ -9,7 +9,8 @@ services:
     ports:
       - "56730:80"
     volumes:
-      - app:/var/www
+      # - app:/var/www
+      - .:/var/www
     networks:
       - frontend
       - backend
@@ -25,7 +26,8 @@ services:
       - "56728:80"
     volumes:
       # - nginx:/etc/nginx
-      - app:/var/www
+      # - app:/var/www
+      - .:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
 
     depends_on:
