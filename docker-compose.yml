@@ -11,6 +11,7 @@ services:
     volumes:
       # - app:/var/www
       - ./:/var/www
+      - ./app:/app
     networks:
       - frontend
       - backend
