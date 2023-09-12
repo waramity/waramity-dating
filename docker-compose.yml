@@ -10,7 +10,7 @@ services:
       - "56730:80"
     volumes:
       # - app:/var/www
-      - .:/var/www
+      - ./app:/var/www
     networks:
       - frontend
       - backend
@@ -27,7 +27,7 @@ services:
     volumes:
       # - nginx:/etc/nginx
       # - app:/var/www
-      - .:/var/www
+      - ./app:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
 
     depends_on:
@@ -38,13 +38,12 @@ services:
 #Docker Networks
 networks:
   frontend:
-    driver: bridge
+  # driver: bridge
   backend:
-    driver: bridge
-
+    # driver: bridge
 #Volumes
-volumes:
-  app:
-    driver: local
-  nginx:
-    driver: local
+# volumes:
+# app:
+# driver: local
+# nginx:
+# driver: local
