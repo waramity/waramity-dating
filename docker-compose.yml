@@ -25,7 +25,7 @@ services:
       - "56728:80"
     volumes:
       # - nginx:/etc/nginx
-      # - ./:/var/www
+      - app:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
 
     depends_on:
