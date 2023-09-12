@@ -44,8 +44,8 @@ app.register_blueprint(dating_blueprint)
 from app.features.auth import auth as auth_blueprint
 app.register_blueprint(auth_blueprint)
 
-dating_socket.init_app(app=app, cors_allowed_origins="*")
-# dating_socket.init_app(app, manage_session=False, cors_allowed_origins="*")
+# dating_socket.init_app(app=app, cors_allowed_origins="*")
+dating_socket.init_app(app, manage_session=False, cors_allowed_origins="*")
 db.init_app(app)
 sess.init_app(app)
 
