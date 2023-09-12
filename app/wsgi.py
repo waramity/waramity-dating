@@ -1,11 +1,11 @@
 
 from eventlet import wsgi
 import eventlet
-from app import app
+from . import app
 
-from app.scheduler import sched
+from .scheduler import sched
 
-from app.features.dating import socketio
+from .features.dating import socketio
 
 if __name__ == "__main__":
     # app.run(host="0.0.0.0", port=80, debug=True)
