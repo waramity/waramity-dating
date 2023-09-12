@@ -76,6 +76,9 @@ USER www
 
 EXPOSE 56730
 
+RUN echo 'kuy'
+
+
 ENTRYPOINT ["./entrypoint.sh"]
 
 
