@@ -56,11 +56,11 @@ RUN pip install gevent
 
 
 # Add user for flask application
-# RUN addgroup -g $GROUP_ID www
-# RUN adduser -D -u $USER_ID -G www www -s /bin/sh
+RUN addgroup -g $GROUP_ID www
+RUN adduser -D -u $USER_ID -G www www -s /bin/sh
 
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
+# RUN groupadd -g 1000 www
+# RUN useradd -u 1000 -ms /bin/bash -g www www
 
 
 COPY . /var/www
