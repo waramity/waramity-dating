@@ -1,17 +1,47 @@
 version: "3"
 services:
-  web:
+  app:
     build: .
     image: docker.waramity-dating
     env_file: .env
+    restart: unless-stopped
+    tty: true
     ports:
       - "56730:80"
+      - "443:443"
     volumes:
-      - .:/app
-  db:
-    image: postgres:15
-    env_file: .env
+      - app:/var/www
+    networks:
+      - frontend
+      - backend
+  nginx:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    image: nginx
+    container_name: ngnix
+    restart: unless-stopped
+    tty: true
     ports:
       - "56728:80"
-    # expose:
-    #   - 5432
+      - "443:443"
+    volumes:
+      - nginx:/etc/nginx
+    depends_on:
+      - app
+    networks:
+      - frontend
+
+#Docker Networks
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
+#Volumes
+volumes:
+  app:
+    driver: local
+  nginx:
+    driver: local

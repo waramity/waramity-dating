@@ -57,7 +57,6 @@ RUN chown -R www:www /var/www/
 # Change current user to www
 USER www
 
-
 EXPOSE 443
 
 CMD [ "gunicorn", "--worker-class", "eventlet", "-w", "4", "--bind", "0.0.0.0:443", "wsgi:app"]
