@@ -77,6 +77,7 @@ USER www
 
 EXPOSE 56730
 
+RUN ["chmod", "+x", "./entrypoint.sh"]
 
 ENTRYPOINT ["./entrypoint.sh"]
 
