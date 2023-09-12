@@ -52,6 +52,7 @@ COPY requirements.txt /var/www/requirements.txt
 
 RUN pip install -r /var/www/requirements.txt
 RUN pip install gunicorn
+RUN pip install gevent
 
 
 # Add user for flask application
