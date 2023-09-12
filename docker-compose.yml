@@ -10,8 +10,8 @@ services:
       - "56730:80"
     volumes:
       # - app:/var/www
-      - ./app:/var/www
-      - ./app:/app
+      - ./:/var/www
+      - ./:/app
     networks:
       - frontend
       - backend
@@ -30,7 +30,7 @@ services:
     volumes:
       # - nginx:/etc/nginx
       # - app:/var/www
-      - ./app:/var/www
+      - ./:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
 
     depends_on:
