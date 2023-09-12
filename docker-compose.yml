@@ -8,7 +8,6 @@ services:
     tty: true
     ports:
       - "56730:80"
-      - "443:443"
     volumes:
       - app:/var/www
     networks:
@@ -24,7 +23,6 @@ services:
     tty: true
     ports:
       - "56728:80"
-      - "443:443"
     volumes:
       # - nginx:/etc/nginx
       - ./:/var/www
