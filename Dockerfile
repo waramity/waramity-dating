@@ -35,9 +35,9 @@ ENV GROUP_ID=1000 \
 
 WORKDIR /var/www/
 
-ADD . /var/www/
+# ADD . /var/www/
 
-ENV STATIC_URL /static
+# ENV STATIC_URL /static
 ENV STATIC_PATH /var/www/app/static
 COPY requirements.txt /var/www/requirements.txt
 
@@ -48,11 +48,17 @@ RUN pip install gunicorn
 
 
 # Add user for flask application
-RUN addgroup -g $GROUP_ID www
-RUN adduser -D -u $USER_ID -G www www -s /bin/sh
+# RUN addgroup -g $GROUP_ID www
+# RUN adduser -D -u $USER_ID -G www www -s /bin/sh
+
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
 
 
-RUN chown -R www:www /var/www/
+COPY . /var/www
+# RUN chown -R www:www /var/www/
+COPY --chown=www:www . /var/www
+
 
 # Change current user to www
 USER www
