@@ -40,7 +40,7 @@ WORKDIR /var/www/
 
 # Install Supervisord
 # RUN apt-get update && apt-get install -y supervisor \
-&& rm -rf /var/lib/apt/lists/*
+# && rm -rf /var/lib/apt/lists/*
 
 # ADD . /var/www/
 
