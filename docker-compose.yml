@@ -17,6 +17,7 @@ services:
       - frontend
       - backend
     # command: gunicorn --worker-class eventlet -w 4 -b :80 wsgi:app
+    command: gunicorn --worker-class eventlet -w 4 -b :56730 wsgi:app
     # command: uwsgi --http :56730 --gevent 1000 --http-websockets --master --wsgi-file wsgi.py --callable app
     # command: sh -c "cd djangodocker/ && gunicorn djangodocker.wsgi:application --bind 0.0.0.0:8000"
 
