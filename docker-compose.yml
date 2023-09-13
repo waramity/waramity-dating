@@ -34,7 +34,7 @@ services:
       # - "80:80"
       # - "443:443"
     volumes:
-      # - nginx:/etc/nginx
+      - ./nginx:/etc/nginx
       # - app:/var/www
       # - ./:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
