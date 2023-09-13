@@ -17,35 +17,34 @@
 
 #############################################################################################
 
-FROM tiangolo/uwsgi-nginx:python3.10
-# RUN apk --update add bash nano
-ENV STATIC_URL /static
-ENV STATIC_PATH /var/www/app/static
-COPY requirements.txt /var/www/requirements.txt
-RUN pip install -r /var/www/requirements.txt
+# FROM tiangolo/uwsgi-nginx:python3.10
+# ENV STATIC_URL /static
+# ENV STATIC_PATH /var/www/app/static
+# COPY requirements.txt /var/www/requirements.txt
+# RUN pip install -r /var/www/requirements.txt
 
 
 
 #############################################################################################
 
-# FROM python:3.10.7-alpine
+FROM python:3.10.7-alpine
 
-# ENV GROUP_ID=1000 \
-#     USER_ID=1000
+ENV GROUP_ID=1000 \
+   USER_ID=1000
 
-# WORKDIR /var/www/
-# ENV STATIC_PATH /var/www/app/static
-# COPY requirements.txt /var/www/requirements.txt
-# RUN pip install -r /var/www/requirements.txt
-# RUN pip install gunicorn
-# RUN addgroup -g $GROUP_ID www
-# RUN adduser -D -u $USER_ID -G www www -s /bin/sh
-# COPY . /var/www
-# COPY --chown=www:www . /var/www
-# USER www
+WORKDIR /var/www/
+ENV STATIC_PATH /var/www/app/static
+COPY requirements.txt /var/www/requirements.txt
+RUN pip install -r /var/www/requirements.txt
+RUN pip install gunicorn
+RUN addgroup -g $GROUP_ID www
+RUN adduser -D -u $USER_ID -G www www -s /bin/sh
+COPY . /var/www
+COPY --chown=www:www . /var/www
+USER www
 
-# EXPOSE 443
-# EXPOSE 80 
+EXPOSE 443
+EXPOSE 80
 
 #############################################################################################
 
@@ -93,7 +92,7 @@ RUN pip install -r /var/www/requirements.txt
 # USER www
 
 # EXPOSE 443
-# EXPOSE 80 
+# EXPOSE 80
 
 # CMD [ "gunicorn", "--worker-class", "eventlet", "-w", "4", "--bind", "0.0.0.0:443", "wsgi:app"]
 
@@ -105,4 +104,3 @@ RUN pip install -r /var/www/requirements.txt
 # CMD [ "gunicorn", "--worker-class", "eventlet", "-w", "4", "--bind", "0.0.0.0:56730", "wsgi:app"]
 # CMD [ "gunicorn", "--worker-class", "eventlet", "-w", "4", "--bind", "143.198.206.234:56730", "wsgi:app"]
 # CMD gunicorn --workers 2 -b :5000 wsgi:app  # without shell-script wrapper
-
