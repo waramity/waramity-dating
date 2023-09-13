@@ -71,7 +71,8 @@ COPY --chown=www:www . /var/www
 # Change current user to www
 USER www
 
-# EXPOSE 443
+EXPOSE 443
+EXPOSE 80 
 
 # CMD [ "gunicorn", "--worker-class", "eventlet", "-w", "4", "--bind", "0.0.0.0:443", "wsgi:app"]
 
@@ -80,5 +81,5 @@ EXPOSE 56730
 # RUN ["chmod", "+x", "./entrypoint.sh"]
 # ENTRYPOINT ["./entrypoint.sh"]
 
-# CMD [ "gunicorn", "--worker-class", "eventlet", "-w", "4", "--bind", "0.0.0.0:56730", "wsgi:app"]
+CMD [ "gunicorn", "--worker-class", "eventlet", "-w", "4", "--bind", "0.0.0.0:56730", "wsgi:app"]
 # CMD [ "gunicorn", "--worker-class", "eventlet", "-w", "4", "--bind", "143.198.206.234:56730", "wsgi:app"]
