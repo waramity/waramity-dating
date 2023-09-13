@@ -36,10 +36,10 @@ ENV GROUP_ID=1000 \
 WORKDIR /var/www/
 
 # Remove default configuration from Nginx
-RUN rm /etc/nginx/conf.d/default.conf
+# RUN rm /etc/nginx/conf.d/default.conf
 
 # Install Supervisord
-RUN apt-get update && apt-get install -y supervisor \
+# RUN apt-get update && apt-get install -y supervisor \
 && rm -rf /var/lib/apt/lists/*
 
 # ADD . /var/www/
@@ -52,7 +52,7 @@ COPY requirements.txt /var/www/requirements.txt
 
 RUN pip install -r /var/www/requirements.txt
 RUN pip install gunicorn
-RUN pip install gevent
+# RUN pip install gevent
 
 
 # Add user for flask application
@@ -80,6 +80,5 @@ EXPOSE 56730
 # RUN ["chmod", "+x", "./entrypoint.sh"]
 
 # ENTRYPOINT ["./entrypoint.sh"]
-
 
 CMD [ "gunicorn", "--worker-class", "eventlet", "-w", "4", "--bind", "0.0.0.0:56730", "wsgi:app"]
