@@ -78,7 +78,7 @@ EXPOSE 443
 # EXPOSE 56730
 
 RUN ["chmod", "+x", "./entrypoint.sh"]
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./var/www/entrypoint.sh"]
 
 # CMD [ "gunicorn", "--worker-class", "eventlet", "-w", "4", "--bind", "0.0.0.0:56730", "wsgi:app"]
 # CMD [ "gunicorn", "--worker-class", "eventlet", "-w", "4", "--bind", "143.198.206.234:56730", "wsgi:app"]
