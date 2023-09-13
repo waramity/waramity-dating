@@ -51,6 +51,39 @@ def logout():
 def get_google_provider_cfg():
     return requests.get(app.config['GOOGLE_DISCOVERY_URL']).json()
 
+@auth.route("/dating-auth/<social_auth_id>")
+def dating_auth(social_auth_id):
+    user_social = UserSocial.query.filter_by(social_auth_id=social_auth_id).first()
+    if not user_social:
+        unique_id = uuid.uuid4().hex
+        while User.query.filter_by(id=unique_id).first():
+            unique_id = uuid.uuid4().hex
+
+        user_social = UserSocial(
+            social_auth_id=social_auth_id,
+            social_id=Social.query.filter_by(name='google').first().id,
+            user_id=unique_id
+        )
+
+        user = User(
+            id=unique_id,
+            registered_on=datetime.datetime.now(pytz.timezone('Asia/Bangkok')),
+            user_social=user_social
+        )
+
+        db.session.add(user)
+        db.session.commit()
+    else:
+        user = User.query.filter_by(id=user_social.user_id).first()
+
+    login_user(user)
+
+    session['platform'] = 'dating'
+
+    return redirect(url_for('dating.index'))
+
+
+
 @auth.route("/google-auth")
 def google_auth():
     google_provider_cfg = get_google_provider_cfg()
