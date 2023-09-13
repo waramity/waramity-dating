@@ -9,13 +9,12 @@ services:
     ports:
       - "56730:80"
     volumes:
-      - ./:/var/www
       # - ./:/var/www
       - ./:/app
     networks:
       - frontend
       - backend
-    # command: gunicorn --worker-class eventlet -w 4 -b :56730 wsgi:app
+    command: gunicorn --worker-class eventlet -w 4 -b :56730 wsgi:app
     # command: uwsgi --http :56730 --gevent 1000 --http-websockets --master --wsgi-file wsgi.py --callable app
 
   nginx:
