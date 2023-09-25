@@ -67,7 +67,7 @@
           <div class="modal-body text-center">
             <a
               class="btn btn-lg btn-outline-secondary"
-              href="https://aihub.waramity.com/en/dating-google-auth"
+              href="{% if debug %}http://localhost:5000{% else %}https://aihub.waramity.com/en/dating-google-auth{% endif %}"
               ><img
                 src="https://img.icons8.com/color/16/000000/google-logo.png"
               />

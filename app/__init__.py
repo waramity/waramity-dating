@@ -8,6 +8,7 @@ import os
 from flask_socketio import SocketIO
 
 from config import Config
+from config import DevelopmentConfig
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from flask_login import UserMixin
@@ -23,16 +24,17 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 app = Flask(__name__)
 
-app.debug = True
-app.config.from_object(Config)
-
-app.config['SESSION_TYPE'] = 'filesystem'
+# app.debug = True
+app.config.from_object(DevelopmentConfig)
 
 babel = Babel(app)
 db = SQLAlchemy()
 client = WebApplicationClient(app.config['GOOGLE_CLIENT_ID'])
 google_client = WebApplicationClient(app.config['GOOGLE_CLIENT_ID'])
 sess = Session()
+
+print(app.config['DEBUG'])
+print('sus')
 
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'

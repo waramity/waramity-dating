@@ -7,13 +7,15 @@ from flask_login import login_required, current_user, logout_user
 import geocoder
 
 from app.models import Location, Preferences, User, Gender, Likes, Matches
-from app import db
+from app import db, app
 
 import datetime, time
 from dateutil.relativedelta import relativedelta
 from sqlalchemy import func, and_
 import random
 from math import radians, cos, sin, asin, sqrt
+from flask import current_app
+
 
 import uuid
 
@@ -54,6 +56,10 @@ def haversine(lat1, lon1, lat2, lon2):
 
 @dating.route('/')
 def index():
+
+    print('kuy')
+    debug = current_app.config['DEBUG']
+
     if current_user.is_authenticated:
         if current_user.given_name is None:
             return redirect(url_for('auth.create_profile'))
@@ -62,7 +68,7 @@ def index():
         else:
             return redirect(url_for('dating.app'))
 
-    return render_template('dating/index.html', title=_('Life partner you are looking for'))
+    return render_template('dating/index.html', title=_('Life partner you are looking for'), debug=debug)
 
 def get_geolocation():
     ip = geocoder.ip('me')
@@ -76,6 +82,7 @@ def get_geolocation():
 @login_required
 def app():
     get_geolocation()
+
     return render_template('dating/match.html', title=_('Life partner you are looking for'))
 
 @dating.route('/get-user-based-on-preferences', methods=['POST'])
